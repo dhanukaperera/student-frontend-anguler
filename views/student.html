@@ -1,0 +1,101 @@
+<div class="container" ng-controller="studentController">
+    <!-- Input fields-->
+    <div class="row">
+        <h1>Student</h1>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" ng-model="name">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="age">Age:</label>
+                            <input type="number" max="30" min="0" class="form-control" id="age" ng-model="age">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="filter2">Select list:</label>
+                            <select class="form-control" id="filter2" ng-model="course"
+                                    ng-options="item as item.courseName for item in courses">
+
+                                <!--<option  ng-repeat="row in courses"  >{{row.courseName}}</option>-->
+                            </select>
+                        </div>
+
+                        <button type="button" class="btn btn-primary active" ng-click="test()" ng-model="student">Add
+                            Student
+                        </button>
+                        <button type="button" class="btn btn-primary btn-warning" ng-click="saveUpdate()"
+                                ng-show="showBtn">Update Student
+                        </button>
+                        <button type="button" class="btn btn-primary active" ng-click="courseTest()">Test</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="filterss">Filter Course:</label>
+                <select class="form-control" id="filterss" ng-model="$ctrl"
+                        ng-options="item as item.courseName for item in courses">
+                    <option>All</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="usr">Search:</label>
+                <input type="text" class="form-control" id="usr" ng-model="$ctrl.query">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-search"
+                                                             style="color: aliceblue"></span> Search
+            </button>
+        </div>
+    </div>
+    <hr class="form-horizontal">
+    <!-- Table -->
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Last</th>
+                <th>Age</th>
+                <th>Course</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in students | filter:$ctrl.query | filter:$ctrl.courseName">
+                <td>{{row.firstName}}</td>
+                <td>{{row.lastName}}</td>
+                <td>{{row.age}}</td>
+                <td>{{row.course.courseName}}</td>
+                <td>
+                    <button type="button" class="btn btn-warning right" ng-click="updateStudent(row)"><span
+                            class="glyphicon glyphicon-pencil"></span> Edit
+                    </button>
+                    <button type="button" class="btn btn-danger" ng-click="deleteStudent(row)"><span
+                            class="glyphicon glyphicon-trash"></span> Delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
